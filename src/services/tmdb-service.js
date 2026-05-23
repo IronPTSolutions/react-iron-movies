@@ -32,11 +32,16 @@ function parseMovie(movie) {
 }
 
 
-export async function listMovies(genre) {
+export async function listMovies({ genre, limit } = {}) {
   const params = {}
   if (genre) {
-    params.with_genres = genres[genre]
+    params.with_genres = genres[genre];
   }
   const { data } = await http.get('/discover/movie', { params });
+  return data.results?.map((movie) => parseMovie(movie)).slice(0, limit) ?? [];
+}
+
+export async function searchMovie({ name }) {
+  const { data } = await http.get('/search/movie', { params: { query: name }})
   return data.results?.map((movie) => parseMovie(movie)) ?? [];
 }

@@ -1,9 +1,9 @@
 import { PageLayout } from "../components/layouts";
 
 import jumboBg from '../assets/images/backgrounds/bg-movies.jpg';
-import { MoviesList } from "../components/movies";
+import { MoviesController } from "../components/movies";
 
-function HomePage() {
+function HomePage({ spotGenres = ['Action', 'Drama', 'Horror'] }) {
   return (
     <PageLayout
       jumbotron={{
@@ -12,9 +12,14 @@ function HomePage() {
         subtitle: 'Discover, stream, and explore the world’s greatest movies all in one place.'
       }}
     >
-      
-      <MoviesList genre="Horror" />
 
+      {spotGenres.map((genre) => (
+        <div key={genre} className="mb-2">
+          <h3 className="fw-light">Best of {genre}</h3>
+          <MoviesController genre={genre} limit={6} />
+        </div>
+      ))}
+      
     </PageLayout>
   );
 }
