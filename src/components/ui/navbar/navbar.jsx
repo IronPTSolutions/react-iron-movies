@@ -9,9 +9,14 @@ function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="main-navbar">
-          <ul className="navbar-nav">
+          <ul className="navbar-nav me-auto">
             <li className="nav-item">
               <NavLink className="nav-link" aria-current="page" to="/search"><i className="fa fa-search" aria-hidden="true" /></NavLink>
+            </li>
+          </ul>
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <NavLink className="nav-link" aria-current="page" to="/register">Register</NavLink>
             </li>
           </ul>
         </div>

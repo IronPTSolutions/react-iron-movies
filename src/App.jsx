@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router";
 import { Navbar } from "./components/ui";
-import { HomePage, SearchMoviePage } from "./pages";
+import { HomePage, RegisterPage, SearchMoviePage } from "./pages";
 
 function App() {
   return (
@@ -10,6 +10,7 @@ function App() {
       <Routes>
         <Route index element={<HomePage />} />
         <Route path="/search" element={<SearchMoviePage />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Routes>
     </>
   )
