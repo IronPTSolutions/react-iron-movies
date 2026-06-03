@@ -29,10 +29,35 @@ const handleUserRegister = http.post(`${baseMockDomain}/users`, async (data) => 
     self.localStorage.setItem(LS_USERS_KEY, JSON.stringify(users));
     return HttpResponse.json(user, { status: 201 });
   }
+});
+
+const handleLogin = http.post(`${baseMockDomain}/sessions`, async (data) => {
+  const { username, password } = await data.request.json();
+
+  const user = users.find((registeredUser) => 
+    registeredUser.username === username && registeredUser.password === password
+  );
+
+  if (!user) {
+    return HttpResponse.json(
+      {
+        message: 'Unauthorized',
+        errors: {
+          password: 'Invalid username or password'
+        }
+      },
+      { status: 401 }
+    )
+  } else {
+    const sessionUser = { ...user };
+    delete sessionUser.password;
+    return HttpResponse.json(sessionUser, { status: 201 });
+  }
 })
 
 const worker = setupWorker(
   handleUserRegister,
+  handleLogin
 );
 
 export default worker;

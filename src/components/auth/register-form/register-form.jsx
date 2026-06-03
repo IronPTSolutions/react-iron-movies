@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import * as AuthServer from "../../../services/auth-service";
+import * as AuthService from "../../../services/auth-service";
 import { useNavigate } from "react-router";
 
 
@@ -9,7 +9,7 @@ function RegisterForm() {
 
   const handleUserRegister = async (user) => {
     try {
-      await AuthServer.register(user);
+      await AuthService.register(user);
       navigate('/login');
     } catch (error) {
       console.error(error);
